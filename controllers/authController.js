@@ -7,15 +7,11 @@ const Transaction = mongoose.model('Transaction');
 
 exports.logout = (req, res) => {
   req.logout();
-  req.flash('success', 'You are now logged out!');
   res.redirect('/login');
 };
 
 exports.isLoggedIn = (req, res, next) => {
-  // first check if the user is authenticated
-  if(req.isAuthenticated()) {
-    return next();
-  }
+  if (req.isAuthenticated()) return next();
   res.redirect('/login');
 };
 

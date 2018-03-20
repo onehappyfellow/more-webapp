@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 28);
+/******/ 	return __webpack_require__(__webpack_require__.s = 30);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -377,7 +377,7 @@ module.exports = {
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(25);
+var normalizeHeaderName = __webpack_require__(27);
 
 var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 var DEFAULT_CONTENT_TYPE = {
@@ -472,12 +472,12 @@ module.exports = defaults;
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(0);
-var settle = __webpack_require__(17);
-var buildURL = __webpack_require__(20);
-var parseHeaders = __webpack_require__(26);
-var isURLSameOrigin = __webpack_require__(24);
+var settle = __webpack_require__(19);
+var buildURL = __webpack_require__(22);
+var parseHeaders = __webpack_require__(28);
+var isURLSameOrigin = __webpack_require__(26);
 var createError = __webpack_require__(5);
-var btoa = typeof window !== 'undefined' && window.btoa && window.btoa.bind(window) || __webpack_require__(19);
+var btoa = typeof window !== 'undefined' && window.btoa && window.btoa.bind(window) || __webpack_require__(21);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -570,7 +570,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(22);
+      var cookies = __webpack_require__(24);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ? cookies.read(config.xsrfCookieName) : undefined;
@@ -687,7 +687,7 @@ module.exports = function isCancel(value) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(16);
+var enhanceError = __webpack_require__(18);
 
 /**
  * Create an Error with the specified message, config, error code, and response.
@@ -920,15 +920,6 @@ process.umask = function () {
 "use strict";
 
 
-module.exports = __webpack_require__(11);
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -953,13 +944,87 @@ exports.$ = $;
 exports.$$ = $$;
 
 /***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+function refillVideo(player) {
+  if (!player) return;
+  var video = player.querySelector('.viewer');
+  var progressBar = player.querySelector('.progress__filled');
+  var start = Date.now();
+
+  function handleProgress() {
+    var percent = this.currentTime / this.duration * 100;
+    progressBar.style.flexBasis = percent + '%';
+  }
+  video.addEventListener('timeupdate', handleProgress);
+
+  function videoFinished() {
+    var html = '\n      <form method="POST" action="/api/refill">\n        <input name="timeElapsed" type="hidden" value="' + (Date.now() - start) / 1000 + '" />\n        <button type="submit" class="btn btn-primary max-width-200">Close</button>\n      </form>';
+    document.querySelector('.target').innerHTML = html;
+  }
+  video.addEventListener('ended', videoFinished);
+}
+
+exports.default = refillVideo;
+
+/***/ }),
 /* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _axios = __webpack_require__(12);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function ajaxSetRate(e) {
+  e.preventDefault();
+  var min = 1,
+      max = 3;
+
+  var newRate = this.change.value == 'up' ? this.currentRate.value + 0.2 : this.currentRate.value - 0.2;
+  if (newRate < min) newRate = min;
+  if (newRate > max) newRate = max;
+
+  // initiate post
+  _axios2.default.post(this.action).then(function (res) {
+    console.log(res);
+  }).catch(console.error);
+}
+
+exports.default = ajaxSetRate;
+
+/***/ }),
+/* 11 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 11 */
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = __webpack_require__(13);
+
+/***/ }),
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -967,7 +1032,7 @@ exports.$$ = $$;
 
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(6);
-var Axios = __webpack_require__(13);
+var Axios = __webpack_require__(15);
 var defaults = __webpack_require__(1);
 
 /**
@@ -1002,14 +1067,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(3);
-axios.CancelToken = __webpack_require__(12);
+axios.CancelToken = __webpack_require__(14);
 axios.isCancel = __webpack_require__(4);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(27);
+axios.spread = __webpack_require__(29);
 
 module.exports = axios;
 
@@ -1017,7 +1082,7 @@ module.exports = axios;
 module.exports.default = axios;
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1080,7 +1145,7 @@ CancelToken.source = function source() {
 module.exports = CancelToken;
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1088,10 +1153,10 @@ module.exports = CancelToken;
 
 var defaults = __webpack_require__(1);
 var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(14);
-var dispatchRequest = __webpack_require__(15);
-var isAbsoluteURL = __webpack_require__(23);
-var combineURLs = __webpack_require__(21);
+var InterceptorManager = __webpack_require__(16);
+var dispatchRequest = __webpack_require__(17);
+var isAbsoluteURL = __webpack_require__(25);
+var combineURLs = __webpack_require__(23);
 
 /**
  * Create a new instance of Axios
@@ -1171,7 +1236,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = Axios;
 
 /***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1229,14 +1294,14 @@ InterceptorManager.prototype.forEach = function forEach(fn) {
 module.exports = InterceptorManager;
 
 /***/ }),
-/* 15 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var transformData = __webpack_require__(18);
+var transformData = __webpack_require__(20);
 var isCancel = __webpack_require__(4);
 var defaults = __webpack_require__(1);
 
@@ -1295,7 +1360,7 @@ module.exports = function dispatchRequest(config) {
 };
 
 /***/ }),
-/* 16 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1321,7 +1386,7 @@ module.exports = function enhanceError(error, config, code, response) {
 };
 
 /***/ }),
-/* 17 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1347,7 +1412,7 @@ module.exports = function settle(resolve, reject, response) {
 };
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1373,7 +1438,7 @@ module.exports = function transformData(data, headers, fns) {
 };
 
 /***/ }),
-/* 19 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1414,7 +1479,7 @@ function btoa(input) {
 module.exports = btoa;
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1481,7 +1546,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 };
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1500,7 +1565,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 };
 
 /***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1559,7 +1624,7 @@ function nonStandardBrowserEnv() {
 }();
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1581,7 +1646,7 @@ module.exports = function isAbsoluteURL(url) {
 };
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1650,7 +1715,7 @@ function nonStandardBrowserEnv() {
 }();
 
 /***/ }),
-/* 25 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1668,7 +1733,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 };
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1713,7 +1778,7 @@ module.exports = function parseHeaders(headers) {
 };
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1747,21 +1812,21 @@ module.exports = function spread(callback) {
 };
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(10);
+__webpack_require__(11);
 
-var _bling = __webpack_require__(9);
+var _bling = __webpack_require__(8);
 
-var _refillVideo = __webpack_require__(35);
+var _refillVideo = __webpack_require__(9);
 
 var _refillVideo2 = _interopRequireDefault(_refillVideo);
 
-var _setRate = __webpack_require__(36);
+var _setRate = __webpack_require__(10);
 
 var _setRate2 = _interopRequireDefault(_setRate);
 
@@ -1779,77 +1844,6 @@ function setFill() {
   fill.style.height = percent + '%';
 };
 document.addEventListener("DOMContentLoaded", setFill);
-
-/***/ }),
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-function refillVideo(player) {
-  if (!player) return;
-  var video = player.querySelector('.viewer');
-  var progressBar = player.querySelector('.progress__filled');
-  var start = Date.now();
-
-  function handleProgress() {
-    var percent = this.currentTime / this.duration * 100;
-    progressBar.style.flexBasis = percent + '%';
-  }
-  video.addEventListener('timeupdate', handleProgress);
-
-  function videoFinished() {
-    var html = '\n      <form method="POST" action="/api/refill">\n        <input name="timeElapsed" type="hidden" value="' + (Date.now() - start) / 1000 + '" />\n        <button type="submit" class="btn btn-primary max-width-200">Close</button>\n      </form>';
-    document.querySelector('.target').innerHTML = html;
-  }
-  video.addEventListener('ended', videoFinished);
-}
-
-exports.default = refillVideo;
-
-/***/ }),
-/* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _axios = __webpack_require__(8);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function ajaxSetRate(e) {
-  e.preventDefault();
-  var min = 1,
-      max = 3;
-
-  var newRate = this.change.value == 'up' ? this.currentRate.value + 0.2 : this.currentRate.value - 0.2;
-  if (newRate < min) newRate = min;
-  if (newRate > max) newRate = max;
-
-  // initiate post
-  _axios2.default.post(this.action).then(function (res) {
-    console.log(res);
-  }).catch(console.error);
-}
-
-exports.default = ajaxSetRate;
 
 /***/ })
 /******/ ]);

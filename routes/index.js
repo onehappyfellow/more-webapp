@@ -7,8 +7,8 @@ const { catchErrors } = require('../handlers/errorHandlers');
 router.get('/login', userController.loginForm);
 router.get('/logout', authController.logout);
 
-//router.post('/login', catchErrors(authController.verifyWithSMS));
-router.post('/login', catchErrors(authController.verifyDev));
+router.post('/login', catchErrors(authController.verifyWithSMS));
+//router.post('/login', catchErrors(authController.verifyDev));
 router.post('/verify', catchErrors(authController.checkVerification));
 
 // protected routes
