@@ -1,0 +1,75 @@
+.actions{
+	position:absolute;
+	top:10px;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.action-left{
+	margin: 10px;
+	display:flex;
+}
+@media(max-width : 767px) {
+	.action-left{
+		flex-direction:column;
+	}
+}
+.line{
+	display: flex;
+	align-items: flex-end;
+}
+.amount{
+	width:50px;
+	text-align:right;
+	font-size:20px;
+}
+.unit{
+	font-size:10px;
+	padding-left:4px;
+	padding-bottom:2px;
+	font-weight:bold;
+}
+.action-right{
+	width:50px;
+	margin:10px;
+}
+.streak-wrapper{
+	width:200px;
+	margin:auto;
+}
+.streak-wrapper p{
+	text-align:center;
+}
+.sun-animation{
+	width:50%;
+	margin-left:25%;
+	border:none;
+	background:none;
+	cursor:pointer;
+}
+.stroke.s1{ animation: draw 1.6s linear infinite; }
+.stroke.s2{ animation: draw 1.6s 0.2s linear infinite; }
+.stroke.s3{ animation: draw 1.6s 0.4s linear infinite; }
+.stroke.s4{ animation: draw 1.6s 0.6s linear infinite; }
+.stroke.s5{ animation: draw 1.6s 0.8s linear infinite; }
+.stroke.s6{ animation: draw 1.6s 1s linear infinite; }
+.stroke.s7{ animation: draw 1.6s 1.2s linear infinite; }
+.stroke.s8{ animation: draw 1.6s 1.4s linear infinite; }
+@keyframes draw {
+	0% {opacity:0;}
+	60% {opacity:1;}
+	100% {opacity:1;}
+}
+
+.fill{
+	background-color: $blue;
+	position: absolute;
+	top:0;
+	width: 100%;
+	height: 95%;
+	z-index: -5;
+	transition-duration: 2s;
+	transition-timing-function: ease-in-out;
+	box-sizing: border-box;
+}

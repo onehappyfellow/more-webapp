@@ -1,0 +1,58 @@
+html {
+  font-size:10px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  font-size:1.5rem;
+  color:$black;
+}
+
+h1, h2, h3, h4, h5, h6, {
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing:-1px;
+}
+
+h1{
+  font-size:3rem;
+}
+h2{
+  font-size:2rem;
+  text-transform:uppercase;
+}
+h3{
+  font-size:1.5rem;
+}
+h4{
+  font-size:1.2rem;
+}
+h5{
+  font-size:1rem;
+}
+h6{
+  font-size:0.8rem;
+}
+
+a {
+  text-decoration: none;
+  color:$black;
+}
+
+p a {
+  border-bottom: 2px solid $green;
+}
+
+p {
+  line-height: 2;
+  font-size: 1.6rem;
+  &.small{
+    font-size: 1rem;
+    color: $black;
+    line-height: 1.2;
+  }
+}
+
+.centered{
+  text-align: center;
+}

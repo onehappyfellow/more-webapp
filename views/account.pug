@@ -1,0 +1,49 @@
+extends layout
+
+block header
+  -// nothing to see here, move along
+
+block content
+  .overlay-wrapper
+    .overlay
+      .header
+        a(href="/" alt="Home") X
+      
+      .table-head
+        .row
+          .cell.cell--clickable.cell--active
+            h2 SunJoules
+          .cell.cell--clickable
+            h2 More
+        .row
+          .cell 
+            h4 Date
+          .cell.cell--number
+            h4 Solar Used
+          
+      .table
+        each d in data
+          .row
+            .cell #{d._id}
+            .cell.cell--number #{d.sj_used} SunJoules
+            
+      .settings
+        .setting-box
+          .webapp-image
+            != h.icon('webapp-icon')
+          h3 Currently using solar via the webapp
+        .setting-box.multiplier
+          h2= `${Math.round(user.multiplier * 100)}% SOLAR`
+          #setrate.controls
+            form(method="POST" action="/api/setrate")
+              input(name="currentRate" type="hidden" value=`${Math.round(user.multiplier * 100) / 100}`)
+              input(name="change" type="hidden" value="up")
+              button.up(type="submit") &#x25B2;
+            form(method="POST" action="/api/setrate")
+              input(name="currentRate" type="hidden" value=`${Math.round(user.multiplier * 100) / 100}`)
+              input(name="change" type="hidden" value="down")
+              button.down(type="submit") &#x25BC;
+          p.small= `${Math.round(50 * user.multiplier)} SunJoules per day estimated usage`
+          
+          
+          

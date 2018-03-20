@@ -1,0 +1,5 @@
+mixin phoneForm()
+  form.form(action="/login" method="POST")
+    label.sr-only(for="phone") Mobile Number
+    input.form-control(type="text" name="phone" placeholder="Your mobile number...")
+    button.btn.btn-primary(type="submit") Go

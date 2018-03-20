@@ -1,0 +1,15 @@
+extends layout
+
+include mixins/_phoneForm
+
+block header
+  .headline
+    .banner
+      != h.icon('login-banner')
+
+block content
+  .form-wrapper
+    +phoneForm()
+
+  .logo
+    != h.icon('via-blockchain')

@@ -1,0 +1,19 @@
+extends layout
+
+block header
+  // nothing to see here, move along
+
+block content
+  .overlay-wrapper
+    .overlay
+      .overlay__header
+        a(href="/" alt="Home") X
+      .overlay__body
+        .player
+          video.player__video.viewer(src="/video/advert.mp4" autoplay)
+          .progress
+            .progress__filled
+              
+        .refill
+          h3.sponsor Your SunJoules sponsored by CloudSolar
+          .target
