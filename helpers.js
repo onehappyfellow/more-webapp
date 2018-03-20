@@ -13,8 +13,3 @@ exports.icon = (name) => fs.readFileSync(`./public/images/icons/${name}.svg`);
 
 // Some details about the site
 exports.siteName = 'More Solar';
-
-exports.menu = [
-  { slug: '/login', title: 'Login', icon: 'logout', },
-  { slug: '/account', title: 'Account', icon: 'cog', },
-];

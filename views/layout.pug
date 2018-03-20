@@ -4,20 +4,12 @@ html
     title= `${title} | ${h.siteName}`
     link(rel='stylesheet', href='/dist/style.css')
     link(href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600" rel="stylesheet")
-    //-link(rel="shortcut icon" type="image/png" href="/images/icons/doughnut.png")
+    link(rel="shortcut icon" type="image/png" href="/images/icons/more.gif")
     meta(name="viewport" content="width=device-width, initial-scale=1")
   body
     .body
       block header
-        header.top
-          nav.nav 
-            .nav__section.nav__section--user
-              each item in h.menu
-                li.nav__item
-                  a.nav__link(href=item.slug, class=(currentPath.startsWith(item.slug) ? 'nav__link--active' : ''))
-                    != h.icon(item.icon)
-                    span #{item.title}
-
+        
       block messages
         if locals.flashes
           .inner
