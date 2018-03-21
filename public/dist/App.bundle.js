@@ -962,6 +962,7 @@ function refillVideo(player) {
   function handleProgress() {
     var percent = this.currentTime / this.duration * 100;
     progressBar.style.flexBasis = percent + '%';
+    player.querySelector('.playVideo').style.display = "none";
   }
   video.addEventListener('timeupdate', handleProgress);
 

@@ -7,6 +7,7 @@ function refillVideo(player){
   function handleProgress(){
   	const percent = this.currentTime / this.duration * 100;
   	progressBar.style.flexBasis = `${percent}%`;
+    player.querySelector('.playVideo').style.display = "none";
   }
   video.addEventListener('timeupdate', handleProgress);
 

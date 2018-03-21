@@ -992,7 +992,21 @@ pre.error {
   background: #8aff1a;
   -ms-flex: 0;
       flex: 0;
-  -ms-flex-preferred-size: 50%;
-      flex-basis: 50%; }
+  -ms-flex-preferred-size: 0%;
+      flex-basis: 0%; }
+
+button.playVideo {
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  top: calc(50% - 25px);
+  left: calc(50% - 25px);
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 32px;
+  padding-left: 15px;
+  color: #fff; }
 
 /*# sourceMappingURL=style.css.map*/
