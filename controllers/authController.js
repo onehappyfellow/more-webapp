@@ -15,6 +15,21 @@ exports.isLoggedIn = (req, res, next) => {
   res.redirect('/login');
 };
 
+async function createNewUser(phone, code, codeExpires){
+  const n = new User();
+  n.phone = phone;
+  n.code = code;
+  n.code_expires = codeExpires;
+  const user = await n.save();
+  //create initial transaction
+  const tx = new Transaction();
+  tx.user = mongoose.Types.ObjectId(user._id);
+  tx.sj_account = 50;
+  tx.sj_server = -51;
+  tx.sj_used = 1;
+  await tx.save();
+};
+
 exports.verifyWithSMS = async (req, res) => {
 	// see if a user with that phone number exists
 	const phone = `+1${req.body.phone.replace(/\D/g,'')}`;
@@ -26,17 +41,7 @@ exports.verifyWithSMS = async (req, res) => {
 
 	// new user create, current user modify
 	if(!user){
-		const n = new User();
-		n.phone = phone;
-		n.code = code;
-		n.code_expires = codeExpires;
-		const user = await n.save();
-    //create initial transaction
-    const tx = new Transaction();
-    tx.user = mongoose.Types.ObjectId(user._id);
-    tx.sj_account = 50;
-    tx.sj_server = -50;
-    await tx.save();
+		createNewUser(phone, code, codeExpires);
   } else {
 		user.code = code;
 		user.code_expires = codeExpires;
@@ -67,17 +72,7 @@ exports.verifyDev = async (req, res) => {
 
 	// new user create, current user modify
 	if(!user){
-		const n = new User();
-		n.phone = phone;
-		n.code = code;
-		n.code_expires = codeExpires;
-    const user = await n.save();
-    //create initial transaction
-    const tx = new Transaction();
-    tx.user = mongoose.Types.ObjectId(user._id);
-    tx.sj_account = 50;
-    tx.sj_server = -50;
-    await tx.save();
+		createNewUser(phone, code, codeExpires);
   } else {
 		user.code = code;
 		user.code_expires = codeExpires;

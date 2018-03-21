@@ -78,7 +78,7 @@ async function useSunJoulesForApp(id) {
   // calculate energy used
   const randomization = (Math.random() * 0.4) + 0.8; // between 80 - 120%
   const standardRate = (50 / (24 * 60 * 60 * 1000)); // SJ per period of time in milliseconds
-  const timeElapsed = Date.now() - Date.parse(last[0].timestamp);
+  const timeElapsed = Date.now() - Date.parse(last[0].timestamp) || Date.now();
   const multiplier = user.multiplier;
   const energyUsed = Math.round(standardRate * randomization * multiplier * timeElapsed);
   if (energyUsed == 0) return;
