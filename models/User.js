@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema({
   },
   code: Number,
   code_expires: Date,
+  show_page: {
+    type: String,
+    default: 'welcome'
+  },
   multiplier: {
     type: Number,
     min: 1,

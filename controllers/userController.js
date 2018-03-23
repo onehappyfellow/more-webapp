@@ -3,10 +3,15 @@ const User = mongoose.model('User');
 const Transaction = mongoose.model('Transaction');
 
 exports.home = async (req, res) => {
-  const result = await useSunJoulesForApp(req.user._id);
   const user = await User.findOne({ _id: req.user._id });
-  const accounts = await Transaction.getAccounts(req.user._id);
-  res.render('home', {user, accounts, title: 'Home'});
+  if (user.show_page) {
+    await User.findOneAndUpdate({ _id: req.user._id },{ $set: { show_page: null }});
+    res.redirect(user.show_page);
+  } else {
+    const result = await useSunJoulesForApp(req.user._id);
+    const accounts = await Transaction.getAccounts(req.user._id);
+    res.render('home', {user, accounts, title: 'Home'});
+  }
 };
 
 exports.loginForm = (req, res) => {
@@ -14,6 +19,9 @@ exports.loginForm = (req, res) => {
 };
 exports.video = (req, res) => {
 	res.render('refill', { title: 'Refill SunJoules' });
+};
+exports.welcome = (req, res) => {
+  res.render('welcome', { title: 'Welcome' });
 };
 
 exports.account = async (req, res) => {

@@ -6,6 +6,7 @@ const { catchErrors } = require('../handlers/errorHandlers');
 
 router.get('/login', userController.loginForm);
 router.get('/logout', authController.logout);
+router.get('/welcome', userController.welcome);
 
 if (process.env.NODE_ENV == "development") {
   router.post('/login', catchErrors(authController.verifyDev));

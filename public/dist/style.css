@@ -63,6 +63,12 @@ body {
     .inner {
       padding: 2rem; } }
 
+.text-align-center {
+  text-align: center; }
+
+.float-right {
+  float: right; }
+
 html {
   box-sizing: border-box; }
 
@@ -1008,5 +1014,36 @@ button.playVideo {
   font-size: 32px;
   padding-left: 15px;
   color: #fff; }
+
+.welcome-content {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row; }
+  @media (max-width: 750px) {
+    .welcome-content {
+      -ms-flex-direction: column;
+          flex-direction: column; } }
+
+.welcome-col {
+  -ms-flex: 1;
+      flex: 1;
+  padding: 5px; }
+  .welcome-col h1 {
+    text-align: center; }
+  .welcome-col h2 {
+    text-transform: none;
+    text-align: center; }
+  .welcome-col p {
+    font-size: 1.2rem; }
+  @media (max-width: 750px) {
+    .welcome-col h1, .welcome-col h2 {
+      text-align: left;
+      display: inline;
+      margin: 0;
+      margin-right: 5px;
+      font-size: 1.6rem; }
+    .welcome-col h1 {
+      font-size: 2.4rem; } }
 
 /*# sourceMappingURL=style.css.map*/
