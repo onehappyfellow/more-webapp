@@ -1,0 +1,32 @@
+html{
+  font-family: sans-serif;
+  font-size: 14px;
+  color: #4d4d4d;
+}
+
+p{
+  font-size:1.6rem;
+  line-height: 2;
+}
+
+body {
+  background: #8aff1a;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin:0; }
+  body:before {
+    content: '';
+    display: block;
+    background: #008cc0;
+    height: 10px;
+    width: 100%; }
+
+#root {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; }

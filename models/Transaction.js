@@ -15,6 +15,7 @@ const transactionSchema = new mongoose.Schema({
   sj_server: Number,
   sj_account: Number,
   sj_used: Number,
+  sj_burned: Number,
   mt_account: Number,
   memo: String
 });
@@ -26,6 +27,7 @@ transactionSchema.statics.getAccounts = function(id) {
       sj_server: { $sum: "$sj_server" },
       sj_account: { $sum: "$sj_account" },
       sj_used: { $sum: "$sj_used" },
+      sj_burned: { $sum: "$sj_burned" },
       mt_account: { $sum: "$mt_account" }
     } }
   ]);
